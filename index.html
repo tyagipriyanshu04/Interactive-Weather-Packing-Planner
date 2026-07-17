@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather & Packing Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-glyph" aria-hidden="true">☁︎</span>
+      <div class="brand-text">
+        <h1 data-testid="app-title">Weather &amp; Packing Planner</h1>
+        <p class="tagline">Real-time forecasts. Smart packing. Zero guesswork.</p>
+      </div>
+    </div>
+    <div class="unit-toggle" role="group" aria-label="Temperature unit">
+      <button class="unit-btn active" data-unit="C" data-testid="unit-celsius-btn">°C</button>
+      <span class="unit-divider" aria-hidden="true">|</span>
+      <button class="unit-btn" data-unit="F" data-testid="unit-fahrenheit-btn">°F</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Search -->
+    <section class="search-section">
+      <div class="search-wrap">
+        <input
+          type="text"
+          id="cityInput"
+          placeholder="Search city..."
+          autocomplete="off"
+          data-testid="city-input"
+        />
+        <button id="searchBtn" class="btn-primary" data-testid="search-btn">
+          <span class="btn-label">Search</span>
+        </button>
+        <button id="geoBtn" class="btn-secondary" data-testid="geolocation-btn" title="Use my location">
+          <span class="geo-dot"></span>
+          <span>Use My Location</span>
+        </button>
+      </div>
+      <p id="errorMsg" class="error-msg" role="alert" data-testid="error-msg"></p>
+
+      <div class="history-wrap" id="historyWrap" data-testid="history-wrap" hidden>
+        <span class="history-label">Recent:</span>
+        <div class="history-chips" id="historyChips"></div>
+      </div>
+    </section>
+
+    <!-- Loading -->
+    <div id="loader" class="loader" hidden data-testid="loader">
+      <div class="spinner"></div>
+      <span>Fetching weather...</span>
+    </div>
+
+    <!-- Results -->
+    <section id="results" class="results" hidden data-testid="results-section">
+      <div class="grid-two">
+        <!-- Current weather card -->
+        <article class="card current-card" data-testid="current-weather-card">
+          <div class="card-head">
+            <span class="card-kicker">Current</span>
+            <span class="card-time" id="localTime"></span>
+          </div>
+          <div class="current-main">
+            <div class="current-left">
+              <h2 id="cityName" data-testid="city-name"></h2>
+              <p id="weatherDesc" class="weather-desc" data-testid="weather-desc"></p>
+              <div class="temp-row">
+                <span id="tempMain" class="temp-main" data-testid="temp-main"></span>
+                <span id="tempUnit" class="temp-unit">°C</span>
+              </div>
+              <p class="feels-like" id="feelsLike" data-testid="feels-like"></p>
+            </div>
+            <div class="current-right">
+              <img id="weatherIcon" class="weather-icon" alt="" data-testid="weather-icon" />
+            </div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-item">
+              <span class="meta-label">Humidity</span>
+              <span class="meta-value" id="humidity" data-testid="humidity"></span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Wind</span>
+              <span class="meta-value" id="wind" data-testid="wind"></span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Pressure</span>
+              <span class="meta-value" id="pressure" data-testid="pressure"></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Packing card -->
+        <article class="card packing-card" data-testid="packing-card">
+          <div class="card-head">
+            <span class="card-kicker">Packing Suggestions</span>
+            <span class="pack-count" id="packCount"></span>
+          </div>
+          <ul id="packingList" class="packing-list" data-testid="packing-list"></ul>
+          <p class="packing-note">Suggestions update automatically based on conditions.</p>
+        </article>
+      </div>
+
+      <!-- Forecast -->
+      <section class="forecast-section">
+        <div class="forecast-head">
+          <h3>3-Day Forecast</h3>
+          <span class="forecast-sub">Min / Max at a glance</span>
+        </div>
+        <div class="forecast-grid" id="forecastGrid" data-testid="forecast-grid"></div>
+      </section>
+    </section>
+
+    <!-- Empty state -->
+    <section id="emptyState" class="empty-state" data-testid="empty-state">
+      <div class="empty-illus" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+      <h2>Plan smarter trips.</h2>
+      <p>Search a city or use your location to see the weather and get instant packing suggestions.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by OpenWeatherMap · Built with vanilla JS</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
